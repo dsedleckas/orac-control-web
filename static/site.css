@@ -77,9 +77,8 @@ html, body {
 .param-block {
     display: inline-block;
     position: relative;
-    width: 100%;
-    vertical-align: top;
     overflow: hidden;
+    padding: 5px;
 }
 
 .param-text {
@@ -94,13 +93,18 @@ html, body {
 }
 
 @media (min-width: 576px) {
-    .params-columns .param-block {
-        width: calc(25% - 10px);
+    .params-container .param-block {
+        width: 25%;
     }
 }
 
 @media (max-width: 575px) {
-    .params-columns .param-block {
-        width: calc(50% - 10px);
+    .params-container .param-block {
+        width: 50%;
     }
+}
+
+.logo {
+    max-height: 50vh;
+    margin: 0 auto;
 }

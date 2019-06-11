@@ -1,13 +1,12 @@
 // server.js
 // load the server resource and route GET method
 const server = require('server')
-const { get, socket } = require('server/router')
+const { socket } = require('server/router')
 
 // get server port from environment or default to 3000
 const port = process.env.PORT || 3000
 
 server({ port }, [
-  get('/', ctx => '<h1>Hello you!</h1>'),
   socket('message', ctx => {
     // Send the message to every socket
     ctx.io.emit('message', ctx.data)
@@ -17,17 +16,29 @@ server({ port }, [
     console.log(ctx)
     ctx.io.emit('count', {msg: 'HI U', count: Object.keys(ctx.io.sockets.sockets).length})
   }),
-  socket('/Connect', ctx => {
+  socket('OracConnect', ctx => {
     console.log('Connect received!')
     ctx.io.emit('oracConnected', 1)
-    ctx.io.emit('/module', 'a1:Braids')
-    ctx.io.emit('/page', 'main')
-    ctx.io.emit('/P1Ctrl', 0.4)
-    ctx.io.emit('/P1Desc', 'Frequency')
-    ctx.io.emit('/P1Value', '100Hz')
-    ctx.io.emit('/text', 1, 'a1:braids')
-    ctx.io.emit('/text', 2, 'demo')
-    ctx.io.emit('/selectText', 2)
+    ctx.io.emit('module', 'a1:Braids')
+    ctx.io.emit('page', 'main')
+    ctx.io.emit('P1Ctrl', 0.4)
+    ctx.io.emit('P1Desc', 'Frequency')
+    ctx.io.emit('P1Value', '100Hz')
+    ctx.io.emit('P2Ctrl', 0.8)
+    ctx.io.emit('P2Desc', 'Decay')
+    ctx.io.emit('P2Value', '110Hz')
+    ctx.io.emit('P3Ctrl', 0.8)
+    ctx.io.emit('P3Desc', 'Decay')
+    ctx.io.emit('P3Value', '110Hz')
+    ctx.io.emit('P4Ctrl', 0.8)
+    ctx.io.emit('P4Desc', 'Decay')
+    ctx.io.emit('P4Value', '110Hz')
+    ctx.io.emit('P5Ctrl', 0.8)
+    ctx.io.emit('P5Desc', 'Decay')
+    ctx.io.emit('P5Value', '110Hz')
+    ctx.io.emit('text', 1, 'a1:braids')
+    ctx.io.emit('text', 2, 'demo')
+    ctx.io.emit('selectText', 2)
   }),
   socket('/P1Ctrl', ctx => {
     console.log('/P1Ctrl', ctx.data)

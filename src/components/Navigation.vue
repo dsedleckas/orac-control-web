@@ -1,36 +1,59 @@
 <template>
-  <div class="d-flex justify-content-between flex-wrap w-100">
-    <div class="p-1 btn-group" role="group">
-      <button @click="prevModule()" class="btn btn-outline-secondary" type="button">◄</button>
-      <button class="btn btn-outline-secondary disabled" style="width:140px;opacity:1;" type="button">Slot:Module</button>
-      <button @click="nextModule()" class="btn btn-outline-secondary" type="button">►</button>
-    </div>
-    <div class="p-1 btn-group" role="group">
-      <button @click="prevPage()" class="btn btn-outline-secondary" type="button">◄</button>
-      <button class="btn btn-outline-secondary disabled" style="width:140px;opacity:1;" type="button">Page</button>
-      <button @click="nextPage()" class="btn btn-outline-secondary" type="button">►</button>
-    </div>
-    <div class="p-1 modal-container">
-      <input id="modal-toggle" type="checkbox" bind="@ShowMenu">
-      <label
-        class="btn btn-outline-secondary"
-        style="margin-bottom:0;cursor:pointer;"
-        for="modal-toggle"
-      >Menu</label>
-      <label class="modal-backdrop" for="modal-toggle"></label>
-      <div class="modal-content" style="border:none;">
-        <label class="modal-close" style="display:none;" for="modal-toggle">&#x2715;</label>
-        <Menu/>
+  <div id="navigation">
+    <div class="d-flex justify-content-between flex-wrap w-100">
+      <div class="p-1 btn-group" role="group">
+        <button @click="prevModule()" class="btn btn-outline-secondary red" type="button">◄</button>
+        <button
+          class="btn btn-outline-secondary font-weight-bold disabled"
+          style="width:140px;opacity:1;"
+          type="button"
+        >{{ module }}</button>
+        <button @click="nextModule()" class="btn btn-outline-secondary red" type="button">►</button>
       </div>
+      <div class="p-1 btn-group" role="group">
+        <button @click="prevPage()" class="btn btn-outline-secondary red" type="button">◄</button>
+        <button
+          class="btn btn-outline-secondary font-weight-bold disabled"
+          style="width:140px;opacity:1;"
+          type="button"
+        >{{ page }}</button>
+        <button @click="nextPage()" class="btn btn-outline-secondary red" type="button">►</button>
+      </div>
+      <div class="p-1">
+        <button
+            @click="showModal = true"
+            class="btn btn-outline-secondary font-weight-bold red"
+            type="button"
+        >&#9776;</button>
+      </div>
+    </div>
+    <div v-if="showModal">
+      <transition name="modal">
+        <div class="modal-mask" @click="showModal = false">
+          <div class="modal-wrapper">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <Menu />
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import Menu from './Menu.vue'
 export default {
   components: {
     Menu
+  },
+  data () {
+    return {
+      showModal: false
+    }
   },
   methods: {
     nextPage () {
@@ -45,6 +68,32 @@ export default {
     prevModule () {
       this.$socket.emit('/ModulePrev', 1)
     }
+  },
+  computed: {
+    ...mapGetters(['page', 'module'])
   }
 }
 </script>
+
+<style lang="css" scoped>
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.red {
+  color: #ff0000;
+}
+</style>

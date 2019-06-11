@@ -3,7 +3,7 @@
     <svg viewBox="0 0 160 130" ref="svg">
       <g :transform="translate">
         <path :d="drawArc(0)" fill="#ff0000" stroke="black"></path>
-        <path :d="drawArc(1)" fill="#f3f3f3" stroke="black"></path>
+        <path :d="drawArc(1)" fill="#6c757d" stroke="black"></path>
         <text text-anchor="middle">{{ (this.value * 100).toFixed(0) }}</text>
       </g>
     </svg>

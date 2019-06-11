@@ -1,20 +1,18 @@
 <template>
-  <div>
-    <button id="show-modal" @click="showModal = true">Show Menu</button>
-      <Modal v-if="showModal" @close="showModal = false">
-        <h3 slot="header">custom header</h3>
-      </Modal>
-    </div>
+  <ul class="list-group">
+    <li class="list-group-item" v-for="(item, index) in text" :key="index" @click.stop="selectHandler(index)" :class="{ 'active': index == selectText}">{{ item }}</li>
+  </ul>
 </template>
 
 <script>
-import Modal from './Modal'
+import { mapGetters } from 'vuex'
 export default {
-  name: 'Menu',
-  components: { Modal },
-  data () {
-    return {
-      showModal: false
+  computed: {
+    ...mapGetters(['text', 'selectText'])
+  },
+  methods: {
+    selectHandler (position) {
+      console.log(position)
     }
   }
 }

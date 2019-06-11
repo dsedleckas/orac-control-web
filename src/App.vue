@@ -1,32 +1,16 @@
 
 <template>
   <div id="app">
-    <div v-if="wsConnected" id="ws-connected">
-      <div v-if="oracConnected" id="orac-connected">
-        <Navigation />
-        <div class="params-container">
-          <div class="params-columns text-center">
-            <OracParameterControl :prefix="'/P1'" />
-            <OracParameterControl :prefix="'/P2'" />
-            <OracParameterControl :prefix="'/P3'" />
-            <OracParameterControl :prefix="'/P4'" />
-            <OracParameterControl :prefix="'/P5'" />
-            <OracParameterControl :prefix="'/P6'" />
-            <OracParameterControl :prefix="'/P7'" />
-            <OracParameterControl :prefix="'/P8'" />
-          </div>
-        </div>
-      </div>
-      <div v-else class="container-centered">
-        <transition name="appear">
-          <strong>Waiting for Mec Service...</strong>
-        </transition>
+    <div v-if="oracConnected" id="connected">
+      <Navigation />
+      <div class="params-container">
+        <OracParameterControl v-for="(param, index) in params" :key="index" :description="String(param.desc || '')" :value="String(param.value || '')" :prefix="'/P' + ++index" />
       </div>
     </div>
-    <div v-else class="container-centered">
-      <transition name="appear">
-        <strong>Waiting for Orac Bridge...</strong>
-      </transition>
+    <div v-else class="container-centered text-center" id="connecting">
+      <img class="logo" v-bind:src="'/static/logo.png'">
+      <strong v-if="wsConnected">Looking for MEC Service...</strong>
+      <strong v-else>Looking for OSC Service...</strong>
     </div>
   </div>
 </template>
@@ -45,7 +29,8 @@ export default {
   computed: {
     ...mapGetters([
       'wsConnected',
-      'oracConnected'
+      'oracConnected',
+      'params'
     ])
   }
 }

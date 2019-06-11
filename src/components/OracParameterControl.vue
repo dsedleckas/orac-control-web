@@ -17,25 +17,14 @@ export default {
     prefix: {
       type: String,
       required: true
-    }
-  },
-  computed: {
-    valueAddress: function () { return this.prefix + 'Value' },
-    descAddress: function () { return this.prefix + 'Desc' }
-  },
-  created () {
-    this.sockets.subscribe(this.valueAddress, (data) => { this.value = data })
-    this.sockets.subscribe(this.descAddress, (data) => { this.description = data })
-  },
-  data () {
-    return {
-      description: 'Rate',
-      value: '1Hz'
-    }
-  },
-  methods: {
-    handleUpdate (event) {
-      console.log(event)
+    },
+    description: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      required: true
     }
   }
 }
