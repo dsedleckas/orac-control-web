@@ -14,11 +14,12 @@ server({ port }, [
   }),
   socket('connect', ctx => {
     console.log('client connected', Object.keys(ctx.io.sockets.sockets))
-    console.log(ctx.data)
+    console.log(ctx)
     ctx.io.emit('count', {msg: 'HI U', count: Object.keys(ctx.io.sockets.sockets).length})
   }),
   socket('/Connect', ctx => {
-    console.log('Connect received!');
+    console.log('Connect received!')
+    ctx.io.emit('oracConnected', 1)
     ctx.io.emit('/module', 'a1:Braids')
     ctx.io.emit('/page', 'main')
     ctx.io.emit('/P1Ctrl', 0.4)
@@ -29,7 +30,40 @@ server({ port }, [
     ctx.io.emit('/selectText', 2)
   }),
   socket('/P1Ctrl', ctx => {
-    console.log(ctx.data);
+    console.log('/P1Ctrl', ctx.data)
+  }),
+  socket('/P2Ctrl', ctx => {
+    console.log('/P2Ctrl', ctx.data)
+  }),
+  socket('/P3Ctrl', ctx => {
+    console.log('/P3Ctrl', ctx.data)
+  }),
+  socket('/P4Ctrl', ctx => {
+    console.log('/P4Ctrl', ctx.data)
+  }),
+  socket('/P5Ctrl', ctx => {
+    console.log('/P5Ctrl', ctx.data)
+  }),
+  socket('/P6Ctrl', ctx => {
+    console.log('/P6Ctrl', ctx.data)
+  }),
+  socket('/P7Ctrl', ctx => {
+    console.log('/P7Ctrl', ctx.data)
+  }),
+  socket('/P8Ctrl', ctx => {
+    console.log('/P8Ctrl', ctx.data)
+  }),
+  socket('/PageNext', ctx => {
+    console.log('/PageNext', ctx.data)
+  }),
+  socket('/ModuleNext', ctx => {
+    console.log('/ModuleNext', ctx.data)
+  }),
+  socket('/PagePrev', ctx => {
+    console.log('/PagePrev', ctx.data)
+  }),
+  socket('/ModulePrev', ctx => {
+    console.log('/ModulePrev', ctx.data)
   })
 ])
   .then(() => console.log(`Server running at http://localhost:${port}`))

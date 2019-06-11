@@ -7,9 +7,15 @@ import store from './store/index'
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://localhost:3000/'
+  connection: 'http://localhost:3000/',
+  vuex: {
+    store,
+    actionPrefix: 'socket_',
+    mutationPrefix: 'SOCKET_'
+  }
 }))
-Vue.config.productionTip = false
+
+Vue.config.productionTip = true
 
 /* eslint-disable no-new */
 new Vue({

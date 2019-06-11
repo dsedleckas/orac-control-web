@@ -2,8 +2,8 @@
   <div class="noselect">
     <svg viewBox="0 0 160 130" ref="svg">
       <g :transform="translate">
-        <path :d="drawArc(0)" fill="#007bff" stroke="black"></path>
-        <path :d="drawArc(1)" fill="#ffffff" stroke="black"></path>
+        <path :d="drawArc(0)" fill="#ff0000" stroke="black"></path>
+        <path :d="drawArc(1)" fill="#f3f3f3" stroke="black"></path>
         <text text-anchor="middle">{{ (this.value * 100).toFixed(0) }}</text>
       </g>
     </svg>
@@ -121,9 +121,8 @@ export default {
 svg {
   max-height:300px;
 }
-
 path {
-  stroke-width: 2px;
+  stroke-width: 0px;
   opacity: 1;
 }
 text {

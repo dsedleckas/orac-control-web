@@ -1,5 +1,5 @@
 <template>
-  <div class="@DisplayStatus">
+  <div v-if="description" class="param-block">
         <div class="d-flex justify-content-between">
             <div class="param-text small font-weight-bold">{{description}}</div>
             <div class="param-text small font-weight-bold">{{value}}</div>
@@ -40,8 +40,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

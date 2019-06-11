@@ -17,7 +17,7 @@
             </div>
             <input v-model="listenPort" placeholder="Port" type="text" aria-label="Port" class="form-control" style="width: 80px;" />
         </div>
-        <button v-on:click="connectOrac()" class="btn btn-block mb-3 mx-2" type="button">
+        <button v-on:click="connectOrac()" class="btn btn-danger mb-3 mx-2" type="button">
             <span>Connect</span>
         </button>
     </div>
@@ -46,8 +46,3 @@ export default {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>

@@ -12,13 +12,10 @@ import Modal from './Modal'
 export default {
   name: 'Menu',
   components: { Modal },
-  data: function () {
+  data () {
     return {
       showModal: false
     }
   }
 }
 </script>
-
-<style scoped>
-</style>
