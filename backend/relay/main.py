@@ -9,6 +9,7 @@ from pythonosc.dispatcher import Dispatcher
 ORAC_IP='127.0.0.1'
 ORAC_PORT=6100
 ORAC_LISTEN_PORT=6009
+SOCKET_LISTEN_IP='0.0.0.0'
 SOCKET_PORT=8080
 
 #
@@ -42,13 +43,16 @@ dispatcher.set_default_handler(oracMessageHandler)
 oracServerTransport = None
 async def runUdpServer():
     print('Starting OSC UDP server')
-    server = AsyncIOOSCUDPServer(('0.0.0.0', ORAC_LISTEN_PORT), dispatcher, loop)
+    server = AsyncIOOSCUDPServer((SOCKET_LISTEN_IP, ORAC_LISTEN_PORT), dispatcher, loop)
     global oracServerTransport
     oracServerTransport, protocol = await server.create_serve_endpoint()  
-    print('OSC UDP server stopped')
+    print('OSC UDP server started')
 
 async def stopUdpServer():
+    print('Stopping OSC UDP server')
     oracServerTransport.close()  # Clean up serve endpoint
+    print('OSC UDP server stopped')
+
 
 #
 # Orac UDP message consumer
@@ -151,7 +155,7 @@ async def runSocketServer():
     global runner
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, 'localhost', SOCKET_PORT)
+    site = web.TCPSite(runner, '0.0.0.0', SOCKET_PORT)
     await site.start()
     print('Socket IO server running')
 
