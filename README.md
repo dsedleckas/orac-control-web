@@ -19,4 +19,9 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+# install python OSC <-> WS bridge
+cd ./backend/relay
+pip3 install -r requirements.txt
+python3 main.py
 ```
