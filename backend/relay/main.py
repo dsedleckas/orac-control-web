@@ -79,6 +79,66 @@ async def OracConnect(sid):
     oracClient.send_message('/Connect', ORAC_LISTEN_PORT)
     await sio.emit('ORAC_CONNECTED', True)
 
+@sio.on('/NavNext')
+async def NavNext(sid, data):
+    oracClient.send_message('/NavNext', 1)
+
+@sio.on('/NavPrev')
+async def NavPrev(sid, data):
+    oracClient.send_message('/NavPrev', 1)
+
+@sio.on('/NavActivate')
+async def NavActivate(sid, data):
+    oracClient.send_message('/NavActivate', 1)
+
+@sio.on('/PagePrev')
+async def PagePrev(sid, data):
+    oracClient.send_message('/PagePrev', 1)
+
+@sio.on('/PageNext')
+async def PageNext(sid, data):
+    oracClient.send_message('/PageNext', 1)
+
+@sio.on('/ModuleNext')
+async def ModuleNext(sid, data):
+    oracClient.send_message('/ModuleNext', 1)
+
+@sio.on('/ModulePrev')
+async def ModuleNext(sid, data):
+    oracClient.send_message('/ModulePrev', 1)
+
+@sio.on('/P1Ctrl')
+async def ModuleNext(sid, data):
+    oracClient.send_message('/P1Ctrl', data)
+
+@sio.on('/P2Ctrl')
+async def P2Ctrl(sid, data):
+    oracClient.send_message('/P2Ctrl', data)
+
+@sio.on('/P3Ctrl')
+async def P3Ctrl(sid, data):
+    oracClient.send_message('/P3Ctrl', data)
+
+@sio.on('/P4Ctrl')
+async def P4Ctrl(sid, data):
+    oracClient.send_message('/P4Ctrl', data)
+
+@sio.on('/P5Ctrl')
+async def P5Ctrl(sid, data):
+    oracClient.send_message('/P5Ctrl', data)
+
+@sio.on('/P6Ctrl')
+async def P6Ctrl(sid, data):
+    oracClient.send_message('/P6Ctrl', data)
+
+@sio.on('/P7Ctrl')
+async def P7Ctrl(sid, data):
+    oracClient.send_message('/P7Ctrl', data)
+
+@sio.on('/P8Ctrl')
+async def P8Ctrl(sid, data):
+    oracClient.send_message('/P8Ctrl', data)
+
 @sio.event
 def disconnect(sid):
     print('disconnect ', sid)
