@@ -33,6 +33,10 @@ const store = new Vuex.Store({
       state.wsConnected = bool
     },
     SET_ORAC_CONNECTED: (state, bool) => {
+      console.log('orac connected!', bool)
+      state.oracConnected = bool
+    },
+    SOCKET_ORAC_CONNECTED: (state, bool) => {
       state.oracConnected = bool
     },
     SOCKET_text: (state, lineValueArray) => {
@@ -48,76 +52,76 @@ const store = new Vuex.Store({
       state.module = moduleName
     },
     SOCKET_P1Desc: (state, desc) => {
-      state.params[0].desc = desc
+      Vue.set(state.params, 0, {desc, ...state.params[0]})
     },
-    SOCKET_P1Ctrl: (state, desc) => {
-      state.params[0].ctrl = desc
+    SOCKET_P1Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 0, {ctrl, ...state.params[0]})
     },
-    SOCKET_P1Value: (state, desc) => {
-      state.params[0].value = desc
+    SOCKET_P1Value: (state, value) => {
+      Vue.set(state.params, 0, {value, ...state.params[0]})
     },
     SOCKET_P2Desc: (state, desc) => {
-      state.params[1].desc = desc
+      Vue.set(state.params, 1, {desc, ...state.params[1]})
     },
-    SOCKET_P2Ctrl: (state, desc) => {
-      state.params[1].ctrl = desc
+    SOCKET_P2Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 1, {ctrl, ...state.params[1]})
     },
-    SOCKET_P2Value: (state, desc) => {
-      state.params[1].value = desc
+    SOCKET_P2Value: (state, value) => {
+      Vue.set(state.params, 1, {value, ...state.params[1]})
     },
     SOCKET_P3Desc: (state, desc) => {
-      state.params[2].desc = desc
+      Vue.set(state.params, 2, {desc, ...state.params[2]})
     },
-    SOCKET_P3Ctrl: (state, desc) => {
-      state.params[2].ctrl = desc
+    SOCKET_P3Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 2, {ctrl, ...state.params[2]})
     },
-    SOCKET_P3Value: (state, desc) => {
-      state.params[2].value = desc
+    SOCKET_P3Value: (state, value) => {
+      Vue.set(state.params, 2, {value, ...state.params[2]})
     },
     SOCKET_P4Desc: (state, desc) => {
-      state.params[3].desc = desc
+      Vue.set(state.params, 3, {desc, ...state.params[3]})
     },
-    SOCKET_P4Ctrl: (state, desc) => {
-      state.params[3].ctrl = desc
+    SOCKET_P4Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 3, {ctrl, ...state.params[3]})
     },
-    SOCKET_P4Value: (state, desc) => {
-      state.params[3].value = desc
+    SOCKET_P4Value: (state, value) => {
+      Vue.set(state.params, 3, {value, ...state.params[3]})
     },
     SOCKET_P5Desc: (state, desc) => {
-      state.params[4].desc = desc
+      Vue.set(state.params, 4, {desc, ...state.params[4]})
     },
-    SOCKET_P5Ctrl: (state, desc) => {
-      state.params[4].ctrl = desc
+    SOCKET_P5Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 4, {ctrl, ...state.params[4]})
     },
-    SOCKET_P5Value: (state, desc) => {
-      state.params[4].value = desc
+    SOCKET_P5Value: (state, value) => {
+      Vue.set(state.params, 4, {value, ...state.params[4]})
     },
     SOCKET_P6Desc: (state, desc) => {
-      state.params[5].desc = desc
+      Vue.set(state.params, 5, {desc, ...state.params[5]})
     },
-    SOCKET_P6Ctrl: (state, desc) => {
-      state.params[5].ctrl = desc
+    SOCKET_P6Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 5, {ctrl, ...state.params[5]})
     },
-    SOCKET_P6Value: (state, desc) => {
-      state.params[5].value = desc
+    SOCKET_P6Value: (state, value) => {
+      Vue.set(state.params, 5, {value, ...state.params[5]})
     },
     SOCKET_P7Desc: (state, desc) => {
-      state.params[6].desc = desc
+      Vue.set(state.params, 6, {desc, ...state.params[6]})
     },
-    SOCKET_P7Ctrl: (state, desc) => {
-      state.params[6].ctrl = desc
+    SOCKET_P7Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 6, {ctrl, ...state.params[6]})
     },
-    SOCKET_P7Value: (state, desc) => {
-      state.params[6].value = desc
+    SOCKET_P7Value: (state, value) => {
+      Vue.set(state.params, 6, {value, ...state.params[6]})
     },
     SOCKET_P8Desc: (state, desc) => {
-      state.params[7].desc = desc
+      Vue.set(state.params, 7, {desc, ...state.params[7]})
     },
-    SOCKET_P8Ctrl: (state, desc) => {
-      state.params[7].ctrl = desc
+    SOCKET_P8Ctrl: (state, ctrl) => {
+      Vue.set(state.params, 7, {ctrl, ...state.params[7]})
     },
-    SOCKET_P8Value: (state, desc) => {
-      state.params[7].value = desc
+    SOCKET_P8Value: (state, value) => {
+      Vue.set(state.params, 7, {value, ...state.params[7]})
     }
   },
   actions: {
