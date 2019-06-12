@@ -34,7 +34,7 @@ oracClient = SimpleUDPClient(ORAC_IP, ORAC_PORT)  # Create client
 # ORAC UDP listener
 #
 
-def oracMessageHandler(address, args=''):
+def oracMessageHandler(address, *args):
     print(address[1:])
     print(args)
     q.put_nowait((address[1:], args))
