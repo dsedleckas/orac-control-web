@@ -5,6 +5,10 @@ import asyncio
 from pythonosc.udp_client import SimpleUDPClient
 from pythonosc.osc_server import AsyncIOOSCUDPServer
 from pythonosc.dispatcher import Dispatcher
+import string_parser
+
+# Monkey-patch for osc empty string support
+string_parser.support_empty_strings()
 
 ORAC_IP='127.0.0.1'
 ORAC_PORT=6100
@@ -110,7 +114,7 @@ async def ModuleNext(sid, data):
     oracClient.send_message('/ModuleNext', 1)
 
 @sio.on('/ModulePrev')
-async def ModuleNext(sid, data):
+async def ModulePrev(sid, data):
     oracClient.send_message('/ModulePrev', 1)
 
 @sio.on('/P1Ctrl')
@@ -171,12 +175,12 @@ if __name__ == '__main__':
     try:
         loop.run_until_complete(runSocketServer())
         loop.run_until_complete(runUdpServer())
-        loop.run_until_complete(consume(q, sio))
+        asyncio.ensure_future(consume(q, sio))
         loop.run_forever()
     except KeyboardInterrupt:
         pass
     print('Stopping...')
     loop.run_until_complete(stopSocketServer())   
     loop.run_until_complete(stopUdpServer())
-    q.join()    
+    q.join()
     print('All complete!')
