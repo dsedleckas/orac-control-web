@@ -105,6 +105,17 @@ html, body {
 }
 
 .logo {
-    max-height: 50vh;
+    height: 180px;
     margin: 0 auto;
+}
+
+.btn-arrow {
+    max-width: 60px;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #ff0000;
 }

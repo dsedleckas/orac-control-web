@@ -8,7 +8,9 @@
       </div>
     </div>
     <div v-else class="container-centered text-center" id="connecting">
-      <img class="logo" v-bind:src="'/static/logo.png'">
+      <div style="min-height: 180px;">
+        <img class="logo" v-bind:src="'/static/logo.png'">
+      </div>
       <strong v-if="wsConnected">Looking for MEC Service...</strong>
       <strong v-else>Looking for OSC Service...</strong>
     </div>

@@ -21,10 +21,10 @@ export default {
   },
   computed: {
     desc () {
-      return this.$store.getters.getParamField(this.prefix, 'Desc')
+      return this.$store.getters.getField(this.prefix, 'Desc')
     },
     value () {
-      return this.$store.getters.getParamField(this.prefix, 'Value')
+      return this.$store.getters.getField(this.prefix, 'Value')
     }
   }
 }

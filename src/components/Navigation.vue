@@ -1,28 +1,29 @@
 <template>
   <div id="navigation">
-    <div class="d-flex justify-content-between flex-wrap w-100">
-      <div class="p-1 btn-group" role="group">
-        <button @click="prevModule()" class="btn btn-outline-secondary red" type="button">◄</button>
+    <div class="d-flex justify-content-between w-100">
+      <div class="p-1 btn-group btn-group-sm w-100" role="group">
+        <button @click="prevModule()" class="btn btn-arrow btn-outline-secondary" type="button">◄</button>
         <button
-          class="btn btn-outline-secondary font-weight-bold disabled"
+          class="btn btn-outline-secondary disabled"
           style="opacity:1;"
           type="button"
-        >{{ module }}</button>
-        <button @click="nextModule()" class="btn btn-outline-secondary red" type="button">►</button>
+        ><small>{{ module }}</small></button>
+        <button @click="nextModule()" class="btn btn-arrow btn-outline-secondary" type="button">►</button>
       </div>
-      <div class="p-1 btn-group" role="group">
-        <button @click="prevPage()" class="btn btn-outline-secondary red" type="button">◄</button>
+      <div class="p-1 btn-group btn-group-sm w-100" role="group">
+        <button :class="{ 'disabled': !page }" @click="prevPage()" class="btn btn-arrow btn-outline-secondary" type="button">◄</button>
         <button
-          class="btn btn-outline-secondary font-weight-bold disabled"
+          class="btn btn-outline-secondary disabled"
           style="opacity:1;"
           type="button"
-        >{{ page }}</button>
-        <button @click="nextPage()" class="btn btn-outline-secondary red" type="button">►</button>
+        ><small>{{ page || '-' }}</small></button>
+        <button :class="{ 'disabled': !page }" @click="nextPage()" class="btn btn-arrow btn-outline-secondary" type="button">►</button>
       </div>
       <div class="p-1">
         <button
             @click="showModal = true"
-            class="btn btn-outline-secondary font-weight-bold red"
+            style="height:100%;"
+            class="btn btn-outline-secondary"
             type="button"
         >&#9776;</button>
       </div>
@@ -32,8 +33,13 @@
         <div class="modal-mask" @click="showModal = false">
           <div class="modal-wrapper">
             <div class="modal-dialog" role="document">
-              <div class="modal-content">
+              <div class="modal-content" style="border:none;">
                 <Menu />
+                <div class="p-1 btn-group" role="group">
+                  <button @click.stop="up()" class="btn btn-outline-secondary">Up</button>
+                  <button @click.stop="down()" class="btn btn-outline-secondary">Down</button>
+                  <button @click.stop="enter()" class="btn btn-outline-secondary">Enter</button>
+                </div>
               </div>
             </div>
           </div>
@@ -67,6 +73,15 @@ export default {
     },
     prevModule () {
       this.$socket.emit('/ModulePrev', 1)
+    },
+    up () {
+      this.$socket.emit('/NavPrev', 1)
+    },
+    down () {
+      this.$socket.emit('/NavNext', 1)
+    },
+    enter () {
+      this.$socket.emit('/NavActivate', 1)
     }
   },
   computed: {

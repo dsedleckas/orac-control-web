@@ -35,10 +35,10 @@ export default {
     ctrlAddress: function () { return '/' + this.prefix + 'Ctrl' },
     value: {
       get () {
-        return this.$store.getters.getParamField(this.prefix, 'Ctrl')
+        return this.$store.getters.getField(this.prefix, 'Ctrl')
       },
       set (value) {
-        this.$store.commit('SET_PARAM_FIELD', [this.prefix, 'Ctrl', value])
+        this.$store.commit('SET_FIELD', [this.prefix, 'Ctrl', value])
       }
     },
     input: function () {
