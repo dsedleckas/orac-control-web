@@ -5,7 +5,7 @@
         <button @click="prevModule()" class="btn btn-outline-secondary red" type="button">◄</button>
         <button
           class="btn btn-outline-secondary font-weight-bold disabled"
-          style="width:140px;opacity:1;"
+          style="opacity:1;"
           type="button"
         >{{ module }}</button>
         <button @click="nextModule()" class="btn btn-outline-secondary red" type="button">►</button>
@@ -14,7 +14,7 @@
         <button @click="prevPage()" class="btn btn-outline-secondary red" type="button">◄</button>
         <button
           class="btn btn-outline-secondary font-weight-bold disabled"
-          style="width:140px;opacity:1;"
+          style="opacity:1;"
           type="button"
         >{{ page }}</button>
         <button @click="nextPage()" class="btn btn-outline-secondary red" type="button">►</button>

@@ -4,7 +4,7 @@
     <div v-if="oracConnected" id="connected">
       <Navigation />
       <div class="params-container">
-        <OracParameterControl v-for="(param, index) in params" :key="index" :description="String(param.desc || '')" :value="String(param.value || '')" :prefix="'/P' + ++index" />
+        <OracParameterControl v-for="no in 8" :key="no" :prefix="'P' + no" />
       </div>
     </div>
     <div v-else class="container-centered text-center" id="connecting">
@@ -29,8 +29,7 @@ export default {
   computed: {
     ...mapGetters([
       'wsConnected',
-      'oracConnected',
-      'params'
+      'oracConnected'
     ])
   }
 }

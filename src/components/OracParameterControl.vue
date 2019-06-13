@@ -1,10 +1,10 @@
 <template>
-  <div v-if="description" class="param-block">
+  <div class="param-block">
         <div class="d-flex justify-content-between">
-            <div class="param-text small font-weight-bold">{{description}}</div>
-            <div class="param-text small font-weight-bold">{{value}}</div>
+            <div class="param-text small font-weight-bold">{{ desc }}</div>
+            <div class="param-text small font-weight-bold">{{ value }}</div>
         </div>
-        <PieControl :prefix="prefix" />
+        <PieControl v-if="desc" :prefix="prefix" />
     </div>
 </template>
 
@@ -17,14 +17,14 @@ export default {
     prefix: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    desc () {
+      return this.$store.getters.getParamField(this.prefix, 'Desc')
     },
-    description: {
-      type: String,
-      required: true
-    },
-    value: {
-      type: String,
-      required: true
+    value () {
+      return this.$store.getters.getParamField(this.prefix, 'Value')
     }
   }
 }

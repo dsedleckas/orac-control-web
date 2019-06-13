@@ -28,12 +28,19 @@ export default {
   data () {
     return {
       angleStart: Math.PI * 2.0 / 3.0,
-      margin: 10,
-      value: 0.45
+      margin: 10
     }
   },
   computed: {
-    ctrlAddress: function () { return this.prefix + 'Ctrl' },
+    ctrlAddress: function () { return '/' + this.prefix + 'Ctrl' },
+    value: {
+      get () {
+        return this.$store.getters.getParamField(this.prefix, 'Ctrl')
+      },
+      set (value) {
+        this.$store.commit('SET_PARAM_FIELD', [this.prefix, 'Ctrl', value])
+      }
+    },
     input: function () {
       return {
         a: this.value,
@@ -51,9 +58,9 @@ export default {
         .endAngle(this.angleStart)(d3.entries(this.input))
     }
   },
-  created () {
-    this.sockets.subscribe(this.ctrlAddress, (data) => { this.value = data })
-  },
+  // created () {
+  //   this.sockets.subscribe(this.ctrlAddress, (data) => { this.value = data })
+  // },
   mounted: function () {
     d3.select(this.$refs.svg)
       .on('mousemove', this.mouseHandle)

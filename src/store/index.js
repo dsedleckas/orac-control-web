@@ -8,16 +8,30 @@ const store = new Vuex.Store({
   state: {
     wsConnected: false,
     oracConnected: false,
-    params: [
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {},
-      {}
-    ],
+    P1Desc: '',
+    P1Value: '',
+    P1Ctrl: '',
+    P2Desc: '',
+    P2Value: '',
+    P2Ctrl: '',
+    P3Desc: '',
+    P3Value: '',
+    P3Ctrl: '',
+    P4Desc: '',
+    P4Value: '',
+    P4Ctrl: '',
+    P5Desc: '',
+    P5Value: '',
+    P5Ctrl: '',
+    P6Desc: '',
+    P6Value: '',
+    P6Ctrl: '',
+    P7Desc: '',
+    P7Value: '',
+    P7Ctrl: '',
+    P8Desc: '',
+    P8Value: '',
+    P8Ctrl: '',
     text: [
       '',
       '',
@@ -25,16 +39,18 @@ const store = new Vuex.Store({
       ''
     ],
     selectText: null,
-    module: 'Empty',
-    page: 'Empty'
+    module: 'Ask Mark',
+    page: 'Ask Mark'
   },
   mutations: {
     SET_WS_CONNECTED: (state, bool) => {
       state.wsConnected = bool
     },
     SET_ORAC_CONNECTED: (state, bool) => {
-      console.log('orac connected!', bool)
       state.oracConnected = bool
+    },
+    SET_PARAM_FIELD: (state, nameFieldValueArray) => {
+      state[nameFieldValueArray[0] + nameFieldValueArray[1]] = nameFieldValueArray[2]
     },
     SOCKET_ORAC_CONNECTED: (state, bool) => {
       state.oracConnected = bool
@@ -46,91 +62,96 @@ const store = new Vuex.Store({
       state.selectText = --lineNumber
     },
     SOCKET_page: (state, pageName) => {
-      state.page = pageName
+      console.log('Page', pageName)
+      if (!pageName) {
+        state.page = 'Empty'
+      } else {
+        state.page = pageName
+      }
     },
     SOCKET_module: (state, moduleName) => {
       state.module = moduleName
-    },
-    SOCKET_P1Desc: (state, desc) => {
-      Vue.set(state.params, 0, {desc, ...state.params[0]})
-    },
-    SOCKET_P1Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 0, {ctrl, ...state.params[0]})
-    },
-    SOCKET_P1Value: (state, value) => {
-      Vue.set(state.params, 0, {value, ...state.params[0]})
-    },
-    SOCKET_P2Desc: (state, desc) => {
-      Vue.set(state.params, 1, {desc, ...state.params[1]})
-    },
-    SOCKET_P2Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 1, {ctrl, ...state.params[1]})
-    },
-    SOCKET_P2Value: (state, value) => {
-      Vue.set(state.params, 1, {value, ...state.params[1]})
-    },
-    SOCKET_P3Desc: (state, desc) => {
-      Vue.set(state.params, 2, {desc, ...state.params[2]})
-    },
-    SOCKET_P3Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 2, {ctrl, ...state.params[2]})
-    },
-    SOCKET_P3Value: (state, value) => {
-      Vue.set(state.params, 2, {value, ...state.params[2]})
-    },
-    SOCKET_P4Desc: (state, desc) => {
-      Vue.set(state.params, 3, {desc, ...state.params[3]})
-    },
-    SOCKET_P4Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 3, {ctrl, ...state.params[3]})
-    },
-    SOCKET_P4Value: (state, value) => {
-      Vue.set(state.params, 3, {value, ...state.params[3]})
-    },
-    SOCKET_P5Desc: (state, desc) => {
-      Vue.set(state.params, 4, {desc, ...state.params[4]})
-    },
-    SOCKET_P5Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 4, {ctrl, ...state.params[4]})
-    },
-    SOCKET_P5Value: (state, value) => {
-      Vue.set(state.params, 4, {value, ...state.params[4]})
-    },
-    SOCKET_P6Desc: (state, desc) => {
-      Vue.set(state.params, 5, {desc, ...state.params[5]})
-    },
-    SOCKET_P6Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 5, {ctrl, ...state.params[5]})
-    },
-    SOCKET_P6Value: (state, value) => {
-      Vue.set(state.params, 5, {value, ...state.params[5]})
-    },
-    SOCKET_P7Desc: (state, desc) => {
-      Vue.set(state.params, 6, {desc, ...state.params[6]})
-    },
-    SOCKET_P7Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 6, {ctrl, ...state.params[6]})
-    },
-    SOCKET_P7Value: (state, value) => {
-      Vue.set(state.params, 6, {value, ...state.params[6]})
-    },
-    SOCKET_P8Desc: (state, desc) => {
-      Vue.set(state.params, 7, {desc, ...state.params[7]})
-    },
-    SOCKET_P8Ctrl: (state, ctrl) => {
-      Vue.set(state.params, 7, {ctrl, ...state.params[7]})
-    },
-    SOCKET_P8Value: (state, value) => {
-      Vue.set(state.params, 7, {value, ...state.params[7]})
     }
   },
   actions: {
     socket_connect: (context) => {
-      setTimeout(() => context.commit('SET_WS_CONNECTED', true), 500)
+      setTimeout(() => context.commit('SET_WS_CONNECTED', true), 2000)
       this.a._vm.$socket.emit('OracConnect')
     },
     socket_oracConnected: (context) => {
       setTimeout(() => context.commit('SET_ORAC_CONNECTED', true), 1000)
+    },
+    socket_P1Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P1', 'Desc', desc])
+    },
+    socket_P1Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P1', 'Ctrl', ctrl])
+    },
+    socket_P1Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P1', 'Value', value])
+    },
+    socket_P2Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P2', 'Desc', desc])
+    },
+    socket_P2Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P2', 'Ctrl', ctrl])
+    },
+    socket_P2Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P2', 'Value', value])
+    },
+    socket_P3Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P3', 'Desc', desc])
+    },
+    socket_P3Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P3', 'Ctrl', ctrl])
+    },
+    socket_P3Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P3', 'Value', value])
+    },
+    socket_P4Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P4', 'Desc', desc])
+    },
+    socket_P4Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P4', 'Ctrl', ctrl])
+    },
+    socket_P4Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P4', 'Value', value])
+    },
+    socket_P5Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P5', 'Desc', desc])
+    },
+    socket_P5Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P5', 'Ctrl', ctrl])
+    },
+    socket_P5Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P5', 'Value', value])
+    },
+    socket_P6Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P6', 'Desc', desc])
+    },
+    socket_P6Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P6', 'Ctrl', ctrl])
+    },
+    socket_P6Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P6', 'Value', value])
+    },
+    socket_P7Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P7', 'Desc', desc])
+    },
+    socket_P7Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P7', 'Ctrl', ctrl])
+    },
+    socket_P7Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P7', 'Value', value])
+    },
+    socket_P8Desc: (context, desc) => {
+      context.commit('SET_PARAM_FIELD', ['P8', 'Desc', desc])
+    },
+    socket_P8Ctrl: (context, ctrl) => {
+      context.commit('SET_PARAM_FIELD', ['P8', 'Ctrl', ctrl])
+    },
+    socket_P8Value: (context, value) => {
+      context.commit('SET_PARAM_FIELD', ['P8', 'Value', value])
     }
   },
   getters: {
@@ -146,14 +167,14 @@ const store = new Vuex.Store({
     module: state => {
       return state.module
     },
-    params: state => {
-      return state.params
-    },
     text: state => {
       return state.text
     },
     selectText: state => {
       return state.selectText
+    },
+    getParamField: (state) => (param, field) => {
+      return state[param + field]
     }
   }
 })
