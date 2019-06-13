@@ -35,11 +35,11 @@
             <div class="modal-dialog" role="document">
               <div class="modal-content" style="border:none;">
                 <Menu />
-                <div class="p-1 btn-group" role="group">
+                <!-- <div class="p-1 btn-group" role="group">
                   <button @click.stop="up()" class="btn btn-outline-secondary">Up</button>
                   <button @click.stop="down()" class="btn btn-outline-secondary">Down</button>
                   <button @click.stop="enter()" class="btn btn-outline-secondary">Enter</button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -73,15 +73,6 @@ export default {
     },
     prevModule () {
       this.$socket.emit('/ModulePrev', 1)
-    },
-    up () {
-      this.$socket.emit('/NavPrev', 1)
-    },
-    down () {
-      this.$socket.emit('/NavNext', 1)
-    },
-    enter () {
-      this.$socket.emit('/NavActivate', 1)
     }
   },
   computed: {

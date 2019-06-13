@@ -78,6 +78,9 @@ const store = new Vuex.Store({
     },
     SOCKET_module: (state, moduleName) => {
       state.module = moduleName
+    },
+    SOCKET_clearText: (state) => {
+      state.T1 = state.T2 = state.T3 = state.T4 = state.T5 = ''
     }
   },
   actions: {
