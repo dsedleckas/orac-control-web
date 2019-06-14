@@ -1,0 +1,121 @@
+/*@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');*/
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.spinner-border{
+    width: 1rem;
+    height: 1rem;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.modal-container .modal-content,
+.modal-container .modal-backdrop {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.2s ease-in;
+}
+
+.modal-container #modal-toggle {
+    display: none;
+}
+
+.modal-container #modal-toggle.active ~ .modal-backdrop, .modal-container #modal-toggle:checked ~ .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+}
+
+.modal-container #modal-toggle.active ~ .modal-content, .modal-container #modal-toggle:checked ~ .modal-content {
+    opacity: 1;
+    width: 300px;
+    height: 301px;
+    position: fixed;
+    left: calc(50% - 150px);
+    top: calc(50% - 150px);
+    z-index: 999;
+    pointer-events: auto;
+    cursor: auto;
+    visibility: visible;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6);
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus,
+.btn.focus, .btn:active.focus, .btn.active.focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.container-centered {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.param-block {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.param-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;    
+}
+
+.params-container {
+    margin: 0 auto;
+}
+
+@media (min-width: 576px) {
+    .params-container .param-block {
+        width: 25%;
+    }
+}
+
+@media (max-width: 575px) {
+    .params-container .param-block {
+        width: 50%;
+    }
+}
+
+.logo {
+    height: 180px;
+    margin: 0 auto;
+}
+
+.btn-arrow {
+    max-width: 60px;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #ff0000;
+    border-color: #ff0000;
+}

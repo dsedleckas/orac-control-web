@@ -87,7 +87,11 @@ const store = new Vuex.Store({
     socket_connect (context) {
       setTimeout(() => {
         context.commit('SET_WS_CONNECTED', true)
-        this._vm.$socket.emit('OracConnect')
+        try {
+          this._vm.$socket.emit('OracConnect')
+        } catch (err) {
+          this.a._vm.$socket.emit('OracConnect')
+        }
       }, 500)
     },
     socket_ORAC_CONNECTED: (context) => {
