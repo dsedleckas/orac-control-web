@@ -79,6 +79,12 @@ sio = socketio.AsyncServer(async_mode='aiohttp')
 app = web.Application()
 sio.attach(app)
 
+async def root_handler(request):
+    return web.HTTPFound('/index.html')
+
+app.router.add_route('GET', '/', root_handler)    
+app.router.add_static('/', path='./dist/')
+
 @sio.event
 def connect(sid, environ):
     print('connect ', sid)
