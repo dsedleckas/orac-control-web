@@ -2,9 +2,11 @@
 
 REPO_NAME=orac-control-web
 REPO_URL=https://github.com/dsedleckas/$REPO_NAME.git
-APP_DIR=/usr/local/orac-control-web/
+APP_DIR=/usr/local/orac-control-web
 
 cd $HOME
+
+pwd
 
 if [ -z `which git` ]; then
 	echo "Installing git..."
@@ -22,9 +24,16 @@ else
 	git pull
 fi
 
-echo "Install started..."
+echo "Setup started..."
+sudo rm -rf $APP_DIR
+sudo mkdir $APP_DIR
+sudo mkdir $APP_DIR/client
+sudo mkdir $APP_DIR/backend
 sudo cp -R client/. $APP_DIR/client
 sudo cp -R backend/. $APP_DIR/backend
 sudo install -v -m 644 orac-control-web.service /usr/lib/systemd/system/
 sudo systemctl daemon-reload
-sudo systemctl enable orac-control.service
+sudo systemctl enable orac-control-web.service
+sudo systemctl start orac-control-web.service
+
+echo "Done! Thank you!"

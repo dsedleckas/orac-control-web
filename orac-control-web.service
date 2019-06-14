@@ -8,7 +8,7 @@ User=patch
 Environment=HOME=/home/patch
 Restart=always
 WorkingDirectory=/usr/local/orac-control-web/backend
-ExecStart=/usr/bin/python3 main.py
+ExecStart=/usr/bin/python3 ./main.py
 
 [Install]
 WantedBy=multi-user.target
