@@ -25,6 +25,7 @@ else
 fi
 
 echo "Setup started..."
+pip3 install -r backend/requirements.txt
 sudo rm -rf $APP_DIR
 sudo mkdir $APP_DIR
 sudo mkdir $APP_DIR/client
