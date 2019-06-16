@@ -17,12 +17,6 @@ SOCKET_LISTEN_IP = '0.0.0.0'
 SOCKET_PORT = 8080
 
 #
-# Message queue for ORAC messages
-#
-
-q = asyncio.Queue()
-
-#
 # Async event loop
 #
 
@@ -40,16 +34,12 @@ oracClient = SimpleUDPClient(ORAC_IP, ORAC_PORT)  # Create client
 
 
 def oracMessageHandler(address, *args):
-    # print(address[1:])
-    # print(args)
-    q.put_nowait((address[1:], args))
-
+    asyncio.ensure_future(sio.emit(address[1:], args))
 
 dispatcher = Dispatcher()
 dispatcher.set_default_handler(oracMessageHandler)
 
 oracServerTransport = None
-
 
 async def runUdpServer():
     print('Starting OSC UDP server')
@@ -64,18 +54,6 @@ async def stopUdpServer():
     print('Stopping OSC UDP server')
     oracServerTransport.close()  # Clean up serve endpoint
     print('OSC UDP server stopped')
-
-
-#
-# Orac UDP message consumer
-#
-
-async def consume(queue, client):
-    print('Starting consumption loop for UDP messages')
-    while True:
-        item = await queue.get()
-        await client.emit(item[0], item[1])
-        queue.task_done()
 
 #
 # Socket IO server
@@ -210,12 +188,10 @@ if __name__ == '__main__':
     try:
         loop.run_until_complete(runSocketServer())
         loop.run_until_complete(runUdpServer())
-        asyncio.ensure_future(consume(q, sio))
         loop.run_forever()
     except KeyboardInterrupt:
         pass
     print('Stopping...')
     loop.run_until_complete(stopSocketServer())
     loop.run_until_complete(stopUdpServer())
-    q.join()
     print('All complete!')
