@@ -10,8 +10,9 @@ git clone https://github.com/dsedleckas/orac-control-web
 cd ./orac-control-web
 ./install-orac-control-web.sh
 ```
+Open http://\<rpi-ip-address\>:8080
 
-## Setup (for development)
+## Development notes
 
 ### Web client
 ``` bash
@@ -32,7 +33,7 @@ npm run build
 
 ### Server OSC <-> Socket.IO 
 ```bash
-cd ./backend/relay
+cd ./backend
 pip3 install -r requirements.txt
 python3 main.py
 ```
