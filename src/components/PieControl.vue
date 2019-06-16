@@ -105,7 +105,7 @@ export default {
       theta = (2 * Math.PI - theta) - 1.5 * Math.PI + this.angleStart
       if (theta > 2 * Math.PI) { theta = theta - Math.PI * 2 }
       if (theta < 0) { theta = theta + Math.PI * 2 }
-      newValue = -1
+      var newValue = -1
       if (r < this.radius && r > this.radius * 0.6) {
         if (theta <= this.angleStart * 2) {
           newValue = theta / (this.angleStart * 2)
