@@ -1,8 +1,17 @@
 # orac-control-web
 
-> Client for ORAC synth
+Web client for the ORAC [synth](https://github.com/TheTechnobear/Orac) to be run on the Raspberry PI. Installation tested and designed to work out of the box on the [Patchbox OS](https://blokas.io/patchbox-os/). Web client also includes UDP OSC <-> Socket.IO bridge and simple static file server.
 
-## Build Setup
+## Install instructions
+Application depends on `git`, `python3` (3.5) and `pip3`. 
+On your rPi:
+```bash
+git clone https://github.com/dsedleckas/orac-control-web
+cd ./orac-control-web
+./install-orac-control-web.sh
+```
+
+## Setup (for development)
 
 ### Web client
 ``` bash
@@ -17,12 +26,9 @@ npm start
 
 # build for production with minification
 npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+# For production use copy `./dist` contents to `./client`
 ```
 
-For production use copy `./dist` contents to `./client`
 
 ### Server OSC <-> Socket.IO 
 ```bash
@@ -30,6 +36,3 @@ cd ./backend/relay
 pip3 install -r requirements.txt
 python3 main.py
 ```
-
-### Automatically launch as a service (on your rPi)
-`./install-orac-control-web.sh`
