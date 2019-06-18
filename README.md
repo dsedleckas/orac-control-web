@@ -5,7 +5,7 @@ Web client for the ORAC [synth](https://github.com/TheTechnobear/Orac) to be run
 ![screenshot](https://raw.githubusercontent.com/dsedleckas/orac-control-web/master/screenshot.png) 
 
 ## Install instructions
-Currently tested on [**Patchbox OS**](https://blokas.io/patchbox-os/). Application depends on `git`, `python3` (3.5) and `pip3`. 
+Currently tested on [**Patchbox OS**](https://blokas.io/patchbox-os/). Application depends on `git`, `python3` (3.5, should work with 3.6, not sure about 3.7) and `pip3`. Install script will check if `git` is installed, but you need to manually verify that `python3` and `pip3` are available (`pip3 --version` and `python3 --version`). Install the missing dependencies through your package manager, e.g. `sudo apt-get install python3-pip`.
 
 SSH to your Pi and run:
 ```sh
